@@ -1,4 +1,5 @@
-import java.io.Reader;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Writer;
 
 //Copyright © 2014 Tobias Fertig, Daniel Knogl
@@ -18,12 +19,57 @@ public class ChessBoard
 	
 	public ChessBoard(String init)
 	{
+		board = new char[5][6];
+		String[] parts = init.split(":");
+		char[] positions = parts[0].toCharArray();
 		
+		int i = 0;
+		int j = 0;
+		for(char c : positions)
+		{
+			board[i][j] = c;
+			j++;
+			if(j == 6)
+			{
+				j = 0;
+				i++;
+			}
+		}
+		
+		this.moveNumber = Integer.parseInt(parts[1]);
+		this.onMove = parts[2].charAt(0);
 	}
 	
-	public ChessBoard(Reader reader)
+	public ChessBoard(BufferedReader reader)
 	{
+		board = new char[5][6];
+		String init = "";
+		try
+		{
+			init = reader.readLine();
+		}catch(IOException e)
+		{
+			e.printStackTrace();
+		}
 		
+		String[] parts = init.split(":");
+		char[] positions = parts[0].toCharArray();
+		
+		int i = 0;
+		int j = 0;
+		for(char c : positions)
+		{
+			board[i][j] = c;
+			j++;
+			if(j == 6)
+			{
+				j = 0;
+				i++;
+			}
+		}
+		
+		this.moveNumber = Integer.parseInt(parts[1]);
+		this.onMove = parts[2].charAt(0);
 	}
 	
 	public String toString()
