@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.io.Writer;
 
 //Copyright © 2014 Tobias Fertig, Daniel Knogl
@@ -40,13 +41,14 @@ public class ChessBoard
 		this.onMove = parts[2].charAt(0);
 	}
 	
-	public ChessBoard(BufferedReader reader)
+	public ChessBoard(Reader reader)
 	{
+		BufferedReader br = new BufferedReader(reader);
 		board = new char[5][6];
 		String init = "";
 		try
 		{
-			init = reader.readLine();
+			init = br.readLine();
 		}catch(IOException e)
 		{
 			e.printStackTrace();
